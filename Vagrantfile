@@ -1,3 +1,6 @@
+# To install store sample data
+sample_data = "false"
+
 Vagrant.configure(2) do |config|
 
 	config.vm.box = "hashicorp/precise64"
