@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+SAMPLE_DATA=$1
+
 echo "Provisioning virtual machine..."
 apt-get update > /dev/null
 
@@ -70,6 +72,17 @@ chmod -R 777 app/etc/*
 chmod -R 777 var/*
 chmod -R 777 media/*
 chmod 550 mage
+
+if [[ $SAMPLE_DATA == "true" ]]; then
+    echo "Importing sample data for Magento"
+    cd /vagrant/magento
+    wget https://raw.githubusercontent.com/Vinai/compressed-magento-sample-data/1.9.1.0/compressed-magento-sample-data-1.9.1.0.tgz > /dev/null
+    tar -xf compressed-magento-sample-data-1.9.1.0.tgz > /dev/null
+    cp -rv magento-sample-data-1.9.1.0/* ./
+    rm -f xvf compressed-magento-sample-data-1.9.1.0.tgz
+    rm -rf magento-sample-data-1.9.1.0/
+    mysql -uroot -p1234 magento < magento_sample_data_for_1.9.1.0.sql
+fi
 
 echo "Install Magento CE"
 cd /vagrant/magento

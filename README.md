@@ -33,3 +33,5 @@ The first time you run this, Vagrant will download the bare Ubuntu box image. Th
 
 ## Customize
 When you change settings in the Vagrantfile, run `vagrant reload --provision` in order to update the settings. Feel free to make a pull request when you have improved something!
+
+If you want sample data installed as well, change sample_data="false" to sample_data="true" in Vagrantfile
